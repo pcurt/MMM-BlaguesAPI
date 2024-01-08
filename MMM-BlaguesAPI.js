@@ -40,7 +40,13 @@ Module.register("MMM-BlaguesAPI", {
     },
     getJoke() {
         Log.info("getJoke");
-        fetch(`https://www.blagues-api.fr/api/${this.config.type}`, {
+        let apiUrl;
+        if (this.config.type === 'random') {
+            apiUrl = 'https://www.blagues-api.fr/api/random';
+        } else {
+            apiUrl = `https://www.blagues-api.fr/api/type/${this.config.type}/random`;
+        }
+        fetch(apiUrl, {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + `${this.config.blaguesApiToken}`,
