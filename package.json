@@ -1,0 +1,20 @@
+{
+  "name": "mmm-blaguesapi",
+  "version": "1.0.0",
+  "description": "Module that shows french jokes from the BlaguesAPI url.",
+  "main": "MMM-BlaguesAPI.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pcurt/MMM-BlaguesAPI.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "jokes"
+  ],
+  "author": "pcurt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pcurt/MMM-BlaguesAPI/issues"
+  },
+  "homepage": "https://github.com/pcurt/MMM-BlaguesAPI#readme"
+}
