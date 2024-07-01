@@ -16,7 +16,7 @@ module.exports = NodeHelper.create({
     }
   },
   getJoke() {
-      console.info("getJoke");
+      //console.info("getJoke");
       let apiUrl;
       if (this.config.type === 'random') {
           apiUrl = 'https://www.blagues-api.fr/api/random';
