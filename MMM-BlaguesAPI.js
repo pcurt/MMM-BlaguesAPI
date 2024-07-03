@@ -11,13 +11,17 @@ Module.register("MMM-BlaguesAPI", {
     },
     joke: null,
     notificationReceived(notification, payload, sender) {
-        if (notification === 'MODULE_DOM_CREATED') {
-            this.getJoke();
-            setInterval(() => {
-                this.getJoke()
-            }, this.config.fetchInterval);
-        }
+      if (notification === 'MODULE_DOM_CREATED') {
+        this.sendSocketNotification("INIT", this.config);
+      }
     },
+    socketNotificationReceived(notification, payload) {
+      if (notification === "JOKE") {
+        this.joke = payload;
+        this.updateDom();
+      }
+    },
+
     getDom() {
         const wrapper = document.createElement("div");
 
@@ -37,26 +41,5 @@ Module.register("MMM-BlaguesAPI", {
         reply.className = "bright medium light fadeInReply";
         reply.innerHTML = this.joke.answer;
         wrapper.appendChild(reply);
-    },
-    getJoke() {
-        Log.info("getJoke");
-        let apiUrl;
-        if (this.config.type === 'random') {
-            apiUrl = 'https://www.blagues-api.fr/api/random';
-        } else {
-            apiUrl = `https://www.blagues-api.fr/api/type/${this.config.type}/random`;
-        }
-        fetch(apiUrl, {
-            method: 'get',
-            headers: new Headers({
-                'Authorization': 'Bearer ' + `${this.config.blaguesApiToken}`,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            })
-        }).then((response) => {
-            response.json().then((joke) => {
-                this.joke = joke;
-                this.updateDom();
-            });
-        });
     }
 });
